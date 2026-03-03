@@ -9,19 +9,53 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap"
       rel="stylesheet"
     />
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="css/main.css" />
+
+    <style>
+      .strategy-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .strategy-card {
+        background: rgba(var(--surface-color), 0.5);
+        border: 1px solid var(--border-color);
+        padding: 1.5rem;
+        border-radius: 12px;
+        transition: 0.3s;
+      }
+      .strategy-card:hover {
+        border-color: var(--accent-color);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+      }
+      .strategy-icon {
+        font-size: 2rem;
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+      }
+      .pro-con {
+        font-size: 0.85rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px dashed var(--border-color);
+      }
+      .pro {
+        color: #10b981;
+      }
+      .con {
+        color: #ef4444;
+      }
+    </style>
   </head>
   <body data-theme="light">
     <nav class="navbar">
@@ -39,7 +73,7 @@
 
     <section
       class="container"
-      style="padding-top: 120px; padding-bottom: 3rem; border-bottom: none"
+      style="padding-top: 120px; padding-bottom: 2rem; border-bottom: none"
     >
       <div
         data-aos="fade-down"
@@ -52,33 +86,32 @@
             color: var(--accent-color);
           "
         >
-          Ingeniería de Datos
+          Ingeniería y Limpieza de Datos
         </h1>
         <p style="font-size: 1.2rem; color: var(--text-secondary)">
-          Análisis, diagnóstico y saneamiento del dataset
-          <code>Salud.csv</code>. Transformación de datos crudos (Raw Data) en
-          un formato estructurado apto para algoritmos de Machine Learning.
+          El 80% del trabajo de un Científico de Datos. Análisis, diagnóstico y
+          saneamiento exhaustivo del dataset <code>Salud.csv</code> evaluando
+          múltiples estrategias de corrección.
         </p>
       </div>
     </section>
 
-    <section class="container" style="padding-top: 2rem">
+    <section class="container" style="padding-top: 1rem">
       <div class="grid-2">
         <div data-aos="fade-right">
           <h2>1. Diagnóstico de Anomalías</h2>
           <p>
-            Los modelos matemáticos (como la Regresión Lineal o los Árboles de
-            Decisión) fallan catastróficamente si reciben texto donde esperan
-            números, o si encuentran valores vacíos (NaN). Al explorar el
-            archivo original, detectamos 4 problemas críticos que deben ser
-            resueltos en el pipeline.
+            Los algoritmos matemáticos no tienen sentido común. Si reciben la
+            palabra <code>"180mg"</code> cuando esperan un número, el programa
+            colapsará. Al revisar nuestro archivo crudo, detectamos ruido
+            sistemático que requiere limpieza estructural.
           </p>
         </div>
 
         <div class="card" data-aos="fade-left">
           <h3>
             <i class="fas fa-bug" style="color: var(--error-text)"></i> Errores
-            Detectados en Salud.csv
+            Críticos Detectados
           </h3>
           <ul
             style="
@@ -89,22 +122,20 @@
             "
           >
             <li>
-              <strong>Tipos Mixtos:</strong> <code>180mg</code> en la columna
-              Glucosa, <code>45 años</code> en Edad.
+              <strong>Tipos Mixtos:</strong> <code>180mg</code> en Glucosa,
+              <code>45 años</code> en Edad.
             </li>
             <li>
               <strong>Errores de Localización:</strong> Uso de coma europea
-              <code>"30,5"</code> en lugar de punto decimal.
+              <code>"30,5"</code> en lugar de punto.
             </li>
             <li>
-              <strong>Inconsistencia Categórica:</strong> <code>" baja "</code>,
-              <code>"NO"</code>, <code>"si"</code> (espacios y mayúsculas
-              aleatorias).
+              <strong>Ruido Categórico:</strong> <code>" baja "</code>,
+              <code>"NO"</code>, <code>"si"</code>.
             </li>
             <li>
-              <strong>Valores Nulos (NaN):</strong> Filas sin edad
-              (<code>,28.9,112...</code>) o sin glucosa
-              (<code>51.0,18.8,80,,Media,No</code>).
+              <strong>Valores Nulos (NaN):</strong> Celdas vacías que rompen las
+              matemáticas del modelo.
             </li>
           </ul>
         </div>
@@ -112,9 +143,100 @@
     </section>
 
     <section class="container">
-      <h2 data-aos="fade-up">2. Desarrollo del Pipeline (Saneamiento)</h2>
+      <h2 data-aos="fade-up">2. Catálogo de Estrategias de Limpieza</h2>
+      <p data-aos="fade-up" style="color: var(--text-secondary)">
+        En Machine Learning no hay una sola forma de limpiar datos. Dependiendo
+        del tamaño de nuestro dataset y del problema, debemos elegir la técnica
+        correcta.
+      </p>
 
-      <div class="card" data-aos="fade-up" style="margin-top: 2rem">
+      <div class="strategy-grid">
+        <div class="strategy-card" data-aos="zoom-in">
+          <i class="fas fa-fill-drip strategy-icon" style="color: #3b82f6"></i>
+          <h3>Imputación (fillna)</h3>
+          <p
+            style="
+              color: var(--text-secondary);
+              font-size: 0.95rem;
+              margin-top: 0.5rem;
+            "
+          >
+            Reemplaza los valores nulos calculando la media, mediana (números) o
+            moda (textos) del resto de la columna.
+          </p>
+          <div class="pro-con">
+            <span class="pro"
+              ><i class="fas fa-check"></i>
+              <strong>Ideal para:</strong> Datasets pequeños donde no podemos
+              darnos el lujo de perder información de otras columnas
+              útiles.</span
+            ><br /><br />
+            <span class="con"
+              ><i class="fas fa-times"></i> <strong>Riesgo:</strong> Puede crear
+              "datos falsos" y reducir la varianza natural si se abusa de
+              ella.</span
+            >
+          </div>
+        </div>
+
+        <div class="strategy-card" data-aos="zoom-in" data-aos-delay="100">
+          <i class="fas fa-trash-alt strategy-icon" style="color: #ef4444"></i>
+          <h3>Eliminación (dropna)</h3>
+          <p
+            style="
+              color: var(--text-secondary);
+              font-size: 0.95rem;
+              margin-top: 0.5rem;
+            "
+          >
+            Borra la fila (paciente) entera si le falta tan solo un dato, o si
+            el dato es insalvable.
+          </p>
+          <div class="pro-con">
+            <span class="pro"
+              ><i class="fas fa-check"></i>
+              <strong>Ideal para:</strong> Datasets enormes (millones de
+              registros) donde borrar 50 filas no afecta estadísticamente.</span
+            ><br /><br />
+            <span class="con"
+              ><i class="fas fa-times"></i> <strong>Riesgo:</strong> Pérdida
+              masiva de datos. Si borras a un paciente porque no tiene "Edad",
+              también pierdes sus datos valiosos de "Glucosa" y "Presión".</span
+            >
+          </div>
+        </div>
+
+        <div class="strategy-card" data-aos="zoom-in" data-aos-delay="200">
+          <i class="fas fa-broom strategy-icon" style="color: #10b981"></i>
+          <h3>Saneamiento Estructural</h3>
+          <p
+            style="
+              color: var(--text-secondary);
+              font-size: 0.95rem;
+              margin-top: 0.5rem;
+            "
+          >
+            Uso de Expresiones Regulares (Regex) para extraer números del texto
+            y eliminación de filas repetidas accidentalmente.
+          </p>
+          <div class="pro-con">
+            <span class="pro"
+              ><i class="fas fa-check"></i>
+              <strong>Obligatorio:</strong> Transforma el texto sucio ("180mg")
+              en variables numéricas operables (180.0) y elimina clones
+              (drop_duplicates).</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <h2 data-aos="fade-right">
+        3. Implementación del Pipeline (Código Python)
+      </h2>
+
+      <div class="card" data-aos="fade-up" style="margin-top: 1.5rem">
         <div
           class="explanation-tabs"
           style="display: flex; gap: 1rem; margin-bottom: 1.5rem"
@@ -148,36 +270,38 @@
 
         <div id="sencillo-clean" style="display: block">
           <p>
-            <strong>¿Qué estamos haciendo?</strong> Estamos pasando un "filtro"
-            automatizado por todo el archivo Excel. Le decimos a Python: "Si ves
-            la palabra 'mg', bórrala. Si ves una coma, cámbiala por un punto
-            para que sea un número real. Y si falta la edad de alguien, ponle la
-            edad promedio de los demás para no tener que borrar a ese paciente
-            completo."
+            En este código aplicamos todas las reglas: Primero quitamos a los
+            pacientes que estén repetidos en la lista. Luego, le quitamos las
+            letras a los números (borramos "mg" y "años"). Finalmente, le damos
+            a elegir al código: si a un paciente le falta un dato, le ponemos el
+            promedio; pero dejamos el código listo por si el jefe nos pide mejor
+            borrar a esos pacientes.
           </p>
         </div>
 
         <div id="examen-clean" style="display: none">
-          <p><strong>Conceptos Clave (Data Wrangling):</strong></p>
-          <ul style="margin-left: 1.5rem; margin-top: 0.5rem">
+          <p><strong>Explicación del Flujo:</strong></p>
+          <ul
+            style="
+              margin-left: 1.5rem;
+              margin-top: 0.5rem;
+              color: var(--text-secondary);
+            "
+          >
             <li>
-              <strong>Casteo y Regex:</strong> Usamos
-              <code>.str.replace()</code> para eliminar caracteres alfanuméricos
-              de vectores numéricos, permitiendo la conversión posterior con
-              <code>.astype(float)</code>.
+              <code>drop_duplicates()</code>: Garantiza que no haya
+              sobre-representación de muestras idénticas.
             </li>
             <li>
-              <strong>Normalización Categórica:</strong>
-              <code>.str.strip().str.capitalize()</code> elimina espacios en
-              blanco incidentales (leading/trailing whitespaces) y unifica el
-              capitalizado para evitar que el modelo trate "si", "Si" y " SI"
-              como tres clases distintas.
+              <code>str.replace()</code> y <code>astype(float)</code>:
+              Transforma las Series de tipo 'Object' a 'Float64'.
             </li>
             <li>
-              <strong>Imputación Robusta:</strong> En lugar de usar
-              <code>dropna()</code> (que reduce la muestra), imputamos valores
-              continuos usando la <strong>mediana</strong> (menos sensible a
-              outliers) y valores categóricos usando la <strong>moda</strong>.
+              Mostramos ambas estrategias de nulos:
+              <strong>Imputación</strong> (Mediana para numéricos, Moda para
+              categóricos) y
+              <strong>Eliminación Listwise</strong> (<code>dropna</code>),
+              dejando la última comentada como alternativa arquitectónica.
             </li>
           </ul>
         </div>
@@ -192,7 +316,13 @@ import numpy as np
 df = pd.read_csv('Documentos/Salud.csv')
 
 # ==========================================
-# FASE 1: LIMPIEZA ESTRUCTURAL (STRING A FLOAT)
+# FASE 1: DUPLICADOS
+# ==========================================
+# Elimina filas que sean exactamente iguales (clones accidentales)
+df.drop_duplicates(inplace=True)
+
+# ==========================================
+# FASE 2: LIMPIEZA ESTRUCTURAL (STRING A FLOAT)
 # ==========================================
 # Cambiar coma por punto en el IMC ("30,5" -> 30.5)
 df['IMC'] = df['IMC'].astype(str).str.replace(',', '.').astype(float)
@@ -201,23 +331,27 @@ df['IMC'] = df['IMC'].astype(str).str.replace(',', '.').astype(float)
 df['Glucosa'] = df['Glucosa'].astype(str).str.replace('mg', '', regex=False).astype(float)
 df['Edad'] = df['Edad'].astype(str).str.replace(' años', '', regex=False).astype(float)
 
-# ==========================================
-# FASE 2: NORMALIZACIÓN CATEGÓRICA
-# ==========================================
-# Quitar espacios extra y poner la primera letra en mayúscula (" baja " -> "Baja", "NO" -> "No")
+# Normalizar categorías (Quitar espacios extra y poner mayúscula inicial)
 df['Actividad_Fisica'] = df['Actividad_Fisica'].str.strip().str.capitalize()
 df['Fumador'] = df['Fumador'].str.strip().str.capitalize()
 
 # ==========================================
-# FASE 3: IMPUTACIÓN DE VALORES NULOS (NaN)
+# FASE 3: ESTRATEGIAS PARA VALORES NULOS (NaN)
 # ==========================================
-# Llenar edades vacías con la mediana de las edades
+
+# ESTRATEGIA A: ELIMINACIÓN (Dropna)
+# Descomenta esta línea si tu dataset es enorme y prefieres borrar el registro completo
+# Si le falta la 'Edad' o la 'Glucosa', borra toda la fila.
+# df.dropna(subset=['Edad', 'Glucosa'], inplace=True)
+
+# ESTRATEGIA B: IMPUTACIÓN (Fillna) -> Usada aquí porque tenemos pocos datos
+# Llenar edades vacías con la mediana de las edades (menos afectada por valores extremos)
 df['Edad'].fillna(df['Edad'].median(), inplace=True)
 
-# Llenar Glucosa vacía con la media
+# Llenar Glucosa vacía con la media aritmética
 df['Glucosa'].fillna(df['Glucosa'].mean(), inplace=True)
 
-# Llenar Fumador vacío con el valor más común (la moda)
+# Llenar variable de texto vacía con el valor más repetido (la moda)
 df['Fumador'].fillna(df['Fumador'].mode()[0], inplace=True)
 
 # Verificar que ya no haya nulos
@@ -226,16 +360,11 @@ print(df.isnull().sum())
       </div>
     </section>
 
-    <section class="container">
+    <section class="container" style="padding-bottom: 6rem">
       <h2 data-aos="fade-right">
-        3. Validación de Resultados (Antes vs Después)
+        4. Validación de Resultados (Antes vs Después)
       </h2>
       <div class="card" data-aos="fade-up" style="margin-top: 1.5rem">
-        <p style="margin-bottom: 1.5rem">
-          Impacto directo de la transformación en la calidad de los datos para
-          entrenamiento.
-        </p>
-
         <div class="data-diff">
           <span style="min-width: 250px"
             ><strong>Error de Sintaxis Numérica:</strong></span
@@ -254,14 +383,6 @@ print(df.isnull().sum())
         </div>
         <div class="data-diff">
           <span style="min-width: 250px"
-            ><strong>Inconsistencia de Clases:</strong></span
-          >
-          <span class="data-bad">" baja " / "BAJA"</span>
-          <i class="fas fa-arrow-right data-arrow"></i>
-          <span class="data-good">"Baja" (Categoría única)</span>
-        </div>
-        <div class="data-diff">
-          <span style="min-width: 250px"
             ><strong>Datos Faltantes (NaN):</strong></span
           >
           <span class="data-bad">NaN (Rompe el modelo)</span>
@@ -272,8 +393,7 @@ print(df.isnull().sum())
 
       <div style="text-align: center; margin-top: 3rem" data-aos="zoom-in">
         <p style="margin-bottom: 1rem; color: var(--text-secondary)">
-          El dataset ahora está listo para la codificación (LabelEncoder) y el
-          entrenamiento de modelos.
+          El dataset ahora está perfectamente estructurado y libre de ruido.
         </p>
         <a href="modelos.html" class="btn btn-primary"
           >Proceder a Modelado
