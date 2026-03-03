@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modelos Predictivos | Tutorial y Portafolio</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="css/main.css" />
+
+    <style>
+      /* Estilos adicionales específicos para el formato tutorial */
+      .tutorial-step {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+      .step-number {
+        background: var(--accent-color);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        z-index: 2;
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+      }
+      .step-content h4 {
+        color: var(--accent-color);
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+      .step-content p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
+      /* Línea conectora entre pasos */
+      .tutorial-container {
+        position: relative;
+        padding-left: 10px;
+        margin-top: 2rem;
+      }
+      .tutorial-container::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        bottom: 40px;
+        left: 30px;
+        width: 2px;
+        background: var(--border-color);
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <nav class="navbar">
+      <div class="logo"><i class="fas fa-database"></i> DS Docs</div>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="limpieza.html">Data Cleaning</a>
+        <a href="modelos.html" class="active">Tutorial de Modelos</a>
+        <a href="comparativa.html">Comparativa</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+    </nav>
+
+    <section
+      class="container"
+      style="padding-top: 120px; padding-bottom: 2rem; border-bottom: none"
+    >
+      <div
+        data-aos="fade-down"
+        style="text-align: center; max-width: 900px; margin: 0 auto"
+      >
+        <h1
+          style="
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+          "
+        >
+          Tutorial: Modelado Predictivo
+        </h1>
+        <p style="font-size: 1.2rem; color: var(--text-secondary)">
+          Una inmersión profunda en la anatomía de los algoritmos. Descubre
+          línea por línea cómo construimos Regresiones, Árboles y Bosques
+          Aleatorios para resolver problemas reales.
+        </p>
+      </div>
+    </section>
+
+    <section class="container" style="padding-top: 2rem">
+      <div class="card" data-aos="fade-up">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+          "
+        >
+          <h2>
+            <i class="fas fa-chart-line"></i> 1. Regresión Múltiple
+            (Statsmodels)
+          </h2>
+          <span
+            class="badge"
+            style="background-color: var(--accent-color); color: white"
+            >Practica2.py</span
+          >
+        </div>
+
+        <p>
+          <strong>El Problema:</strong> Queremos predecir un valor numérico
+          continuo (ej. cuántas toneladas de cultivo se van a cosechar)
+          basándonos en factores ambientales como el riego, la temperatura y la
+          humedad.
+        </p>
+
+        <div class="grid-2" style="margin-top: 2rem">
+          <div class="tutorial-container">
+            <div class="tutorial-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>La Fórmula Matemática (Patsy)</h4>
+                <p>
+                  En Statsmodels, usamos una sintaxis especial de strings:
+                  <code>"Rendimiento_t_ha ~ Riego_mm + Temperatura_C"</code>. La
+                  virgulilla (<code>~</code>) significa "depende de". Le estamos
+                  diciendo al modelo que el rendimiento de la cosecha
+                  <strong>depende de</strong> el riego y la temperatura.
+                </p>
+              </div>
+            </div>
+
+            <div class="tutorial-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>El Entrenamiento (.fit)</h4>
+                <p>
+                  El comando <code>.fit()</code> aplica el método de
+                  <em>Mínimos Cuadrados Ordinarios (OLS)</em>. Matemáticamente,
+                  traza millones de líneas imaginarias hasta encontrar la que
+                  pasa más cerca de todos los puntos de datos a la vez,
+                  minimizando el margen de error.
+                </p>
+              </div>
+            </div>
+
+            <div class="tutorial-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>El Reporte (Summary)</h4>
+                <p>
+                  A diferencia de otras librerías, <code>.summary()</code> es tu
+                  herramienta de auditoría. Si en el reporte ves que la variable
+                  "Humedad" tiene un <strong>P>|t| mayor a 0.05</strong>,
+                  significa que estadísticamente la humedad fue pura
+                  coincidencia y no afecta realmente tu cosecha. ¡Esa es tu
+                  respuesta de examen!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            style="
+              background: var(--surface-color);
+              padding: 1rem;
+              border-radius: 12px;
+              border: 1px solid var(--border-color);
+              box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            "
+          >
+            <h4
+              style="
+                text-align: center;
+                margin-bottom: 1rem;
+                color: var(--text-secondary);
+              "
+            >
+              Predicción vs Realidad
+            </h4>
+            <div style="position: relative; height: 350px; width: 100%">
+              <canvas id="regChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <pre
+          style="margin-top: 2rem"
+        ><button class="copy-btn"><i class="fas fa-copy"></i> Copiar</button><code class="language-python">
+import pandas as pd 
+import statsmodels.formula.api as smf 
+
+df = pd.read_csv("Documentos/agricultura.csv")
+
+# PASO 1 y 2: Definir la ecuación y entrenar el modelo
+modelo = smf.ols(
+    formula="Rendimiento_t_ha ~ Riego_mm + Temperatura_C + Humedad", 
+    data=df
+).fit()
+
+# PASO 3: Imprimir el reporte estadístico gigante
+print(modelo.summary())
+
+# Predicción: Inyectar las respuestas matemáticas en una nueva columna
+df["Estimacion"] = modelo.predict(df)
+            </code></pre>
+      </div>
+    </section>
+
+    <section class="container" style="padding-top: 2rem">
+      <div
+        class="card"
+        data-aos="fade-up"
+        style="border-left: 4px solid #10b981"
+      >
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+          "
+        >
+          <h2>
+            <i class="fas fa-network-wired"></i> 2. Árboles de Clasificación
+            (Sklearn)
+          </h2>
+          <span class="badge" style="background-color: #10b981; color: white"
+            >Practica5.py</span
+          >
+        </div>
+
+        <p>
+          <strong>El Problema:</strong> Ahora la respuesta no es un número.
+          Queremos saber si el agua de un pozo es <strong>"Apta"</strong> o
+          <strong>"No Apta"</strong> (Clasificación Categórica). Para esto, el
+          modelo hace una serie de preguntas de Sí/No como en el juego "Adivina
+          Quién".
+        </p>
+
+        <div
+          class="tutorial-container"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            padding-left: 0;
+          "
+        >
+          <style>
+            #tree-tutorial::before {
+              display: none;
+            }
+          </style>
+
+          <div class="tutorial-step" id="tree-tutorial">
+            <div class="step-number" style="background: #10b981">1</div>
+            <div class="step-content">
+              <h4 style="color: #10b981">LabelEncoder (El Traductor)</h4>
+              <p>
+                Las matemáticas no entienden la palabra "Pozo" o "Río".
+                <code>LabelEncoder.fit_transform()</code> lee esas palabras y
+                las convierte en números (Ej: Pozo = 0, Río = 1).
+                <strong>Regla de oro:</strong> Todo texto debe ser codificado
+                antes de entrar al modelo.
+              </p>
+            </div>
+          </div>
+
+          <div class="tutorial-step">
+            <div class="step-number" style="background: #10b981">2</div>
+            <div class="step-content">
+              <h4 style="color: #10b981">Train/Test Split (La Prueba Ciega)</h4>
+              <p>
+                Si le damos al modelo todas las respuestas, solo las memorizará.
+                Con <code>test_size=0.3</code>, ocultamos el 30% del dataset en
+                una bóveda. El modelo estudia con el 70% restante
+                (Entrenamiento) y luego le tomamos un examen sorpresa con el 30%
+                oculto (Prueba).
+              </p>
+            </div>
+          </div>
+
+          <div class="tutorial-step">
+            <div class="step-number" style="background: #10b981">3</div>
+            <div class="step-content">
+              <h4 style="color: #10b981">Controlando el Overfitting</h4>
+              <p>
+                ¿Qué pasa si el árbol hace demasiadas preguntas? Se vuelve súper
+                específico y falla con datos nuevos (Sobreajuste). El parámetro
+                <code>max_depth=3</code> le corta las ramas, obligándolo a hacer
+                solo 3 niveles de preguntas, forzándolo a encontrar patrones
+                generales, no excepciones.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <pre
+          style="margin-top: 1rem"
+        ><button class="copy-btn"><i class="fas fa-copy"></i> Copiar</button><code class="language-python">
+from sklearn.model_selection import train_test_split 
+from sklearn.preprocessing import LabelEncoder 
+from sklearn.tree import DecisionTreeClassifier 
+from sklearn.metrics import classification_report
+
+df = pd.read_csv("Documentos/CalidadAgua.csv")
+
+# PASO 1: Traducir texto a números
+le_Apta = LabelEncoder()
+df["Apta"] = le_Apta.fit_transform(df["Apta"])
+
+# Separar variables (X) de la respuesta que queremos adivinar (y)
+X = df.drop("Apta", axis=1)
+y = df["Apta"]
+
+# PASO 2: División 70/30 para evitar trampa
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=40)
+
+# PASO 3: Entrenar con poda (max_depth)
+modelo = DecisionTreeClassifier(max_depth=3)
+modelo.fit(X_train, y_train)
+
+# Evaluación Final
+y_pred = modelo.predict(X_test)
+print(classification_report(y_test, y_pred))
+            </code></pre>
+      </div>
+    </section>
+
+    <section class="container" style="padding-top: 2rem; padding-bottom: 6rem">
+      <div
+        class="card"
+        data-aos="fade-up"
+        style="border-left: 4px solid #8b5cf6"
+      >
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+          "
+        >
+          <h2>
+            <i class="fas fa-tree"></i> 3. Random Forest (Ensamble Avanzado)
+          </h2>
+          <span class="badge" style="background-color: #8b5cf6; color: white"
+            >PracticaDiabetes.py</span
+          >
+        </div>
+
+        <p>
+          <strong>La Evolución:</strong> Cuando trabajamos con diagnósticos
+          médicos (como predecir Diabetes), un solo Árbol de Decisión es muy
+          riesgoso; si se equivoca en la primera pregunta, todo el diagnóstico
+          está mal. La solución es crear un <strong>Bosque Aleatorio</strong>.
+        </p>
+
+        <div class="grid-2" style="margin-top: 2rem; align-items: start">
+          <div class="tutorial-container">
+            <div class="tutorial-step">
+              <div class="step-number" style="background: #8b5cf6">1</div>
+              <div class="step-content">
+                <h4 style="color: #8b5cf6">
+                  n_estimators (La Sabiduría de las Multitudes)
+                </h4>
+                <p>
+                  En lugar de crear 1 árbol, instanciamos
+                  <code>RandomForestClassifier(n_estimators=10000)</code>. Esto
+                  crea 10,000 árboles distintos, cada uno entrenado con partes
+                  ligeramente diferentes de los datos. Para dar un diagnóstico,
+                  los 10,000 árboles votan. La clase con más votos gana. Esto
+                  aniquila el margen de error.
+                </p>
+              </div>
+            </div>
+
+            <div class="tutorial-step">
+              <div class="step-number" style="background: #8b5cf6">2</div>
+              <div class="step-content">
+                <h4 style="color: #8b5cf6">Feature Importances</h4>
+                <p>
+                  Una vez que el bosque está entrenado, le podemos preguntar:
+                  <em
+                    >"De todas las variables médicas que te di, ¿cuál influyó
+                    más en tus decisiones?"</em
+                  >. El comando <code>modelo.feature_importances_</code> nos
+                  devuelve un porcentaje exacto. Descubriremos que la Glucosa y
+                  el BMI pesan mucho más que la Presión Arterial.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <pre
+            style="margin: 0"
+          ><button class="copy-btn"><i class="fas fa-copy"></i> Copiar</button><code class="language-python">
+# Importamos el algoritmo de Ensamble (Bosque)
+from sklearn.ensemble import RandomForestClassifier
+
+# PASO 1: Plantar 10,000 árboles que voten juntos
+modelo = RandomForestClassifier(
+    n_estimators=10000, 
+    random_state=40
+)
+# El bosque aprende de forma robusta
+modelo.fit(X_train, y_train)
+
+# Evaluamos su precisión
+y_pred = modelo.predict(X_test)
+print(classification_report(y_test, y_pred))
+
+# PASO 2: Extraer la importancia de cada síntoma
+importancias = modelo.feature_importances_
+for columna, imp in zip(X.columns, importancias):
+    print(f"{columna}: {imp * 100:.2f}%")
+                </code></pre>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container text-center">
+        <p>© 2026 Carlos | Ingeniería en Sistemas Computacionales.</p>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Inicializar la gráfica de Regresión Lineal
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        const isDark = document.body.getAttribute("data-theme") === "dark";
+        const textColor = isDark ? "#94a3b8" : "#475569";
+        const gridColor = isDark ? "#334155" : "#e2e8f0";
+
+        const ctxReg = document.getElementById("regChart").getContext("2d");
+        let regChart = new Chart(ctxReg, {
+          type: "scatter",
+          data: {
+            datasets: [
+              {
+                label: "Datos Reales",
+                data: [
+                  { x: 2.0, y: 2.1 },
+                  { x: 3.0, y: 2.9 },
+                  { x: 4.5, y: 4.8 },
+                  { x: 5.2, y: 5.0 },
+                  { x: 6.8, y: 6.9 },
+                  { x: 7.5, y: 7.2 },
+                ],
+                backgroundColor: "#2563eb",
+                pointRadius: 6,
+                pointHoverRadius: 8,
+              },
+              {
+                type: "line",
+                label: "Modelo Perfecto",
+                data: [
+                  { x: 1.5, y: 1.5 },
+                  { x: 8, y: 8 },
+                ],
+                borderColor: "#ef4444",
+                borderWidth: 2,
+                borderDash: [5, 5],
+                pointRadius: 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                title: { display: true, text: "Real", color: textColor },
+                ticks: { color: textColor },
+                grid: { color: gridColor },
+              },
+              y: {
+                title: { display: true, text: "Predicción", color: textColor },
+                ticks: { color: textColor },
+                grid: { color: gridColor },
+              },
+            },
+            plugins: { legend: { labels: { color: textColor } } },
+          },
+        });
+
+        // Reaccionar al Dark Mode
+        window.addEventListener("themeChanged", (e) => {
+          const dark = e.detail.theme === "dark";
+          const newText = dark ? "#94a3b8" : "#475569";
+          const newGrid = dark ? "#334155" : "#e2e8f0";
+
+          regChart.options.scales.x.title.color = newText;
+          regChart.options.scales.y.title.color = newText;
+          regChart.options.scales.x.ticks.color = newText;
+          regChart.options.scales.y.ticks.color = newText;
+          regChart.options.scales.x.grid.color = newGrid;
+          regChart.options.scales.y.grid.color = newGrid;
+          regChart.options.plugins.legend.labels.color = newText;
+
+          regChart.update();
+        });
+      });
+    </script>
+  </body>
+</html>

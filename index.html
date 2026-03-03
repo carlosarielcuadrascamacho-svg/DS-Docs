@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitectura de Datos | Portafolio Profesional</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body data-theme="light">
+
+    <nav class="navbar">
+        <div class="logo"><i class="fas fa-database"></i> DS Docs</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="limpieza.html">Data Cleaning</a>
+            <a href="modelos.html">Modelos</a>
+            <a href="comparativa.html">Comparativa</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+    </nav>
+
+    <section class="hero container" id="home">
+        <div data-aos="fade-up" class="hero-content">
+            <h1>Arquitectura de Datos & Machine Learning</h1>
+            <p>Documentación técnica y portafolio interactivo. Un análisis profundo de ingeniería de características, regresión múltiple y clasificación predictiva.</p>
+            
+            <div class="badge-container">
+                <span class="badge"><i class="fab fa-python"></i> Python 3</span>
+                <span class="badge"><i class="fas fa-chart-line"></i> Scikit-Learn</span>
+                <span class="badge"><i class="fas fa-chart-bar"></i> Statsmodels</span>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="limpieza.html" class="btn btn-primary">Ver Limpieza de Datos</a>
+                <a href="modelos.html" class="btn btn-secondary">Explorar Modelos</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="repositorios">
+        <div data-aos="fade-right">
+            <h2><i class="fab fa-github"></i> Ecosistema del Proyecto</h2>
+            <p>Este portafolio consolida el trabajo de investigación y desarrollo alojado en dos repositorios principales de GitHub, abarcando desde prácticas iniciales hasta modelos avanzados.</p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 2rem;">
+            <div class="card repo-card" data-aos="zoom-in">
+                <div class="repo-header">
+                    <i class="fab fa-github repo-icon"></i>
+                    <h3>cienciadedatos</h3>
+                </div>
+                <p class="repo-desc">Repositorio principal. Contiene las implementaciones definitivas en Python, incluyendo los exámenes, scripts de regresión lineal (<code>Practica2.py</code>) y clasificación avanzada (<code>PracticaDiabetes.py</code>).</p>
+                <div class="repo-meta">
+                    <span><i class="fas fa-code-branch"></i> Main Branch</span>
+                    <span><i class="fas fa-user"></i> carlosarielcuadrascamacho-svg</span>
+                </div>
+                <a href="https://github.com/carlosarielcuadrascamacho-svg/cienciadedatos" target="_blank" class="btn-outline">Ver Código Fuente</a>
+            </div>
+
+            <div class="card repo-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="repo-header">
+                    <i class="fab fa-github repo-icon"></i>
+                    <h3>datasciencepractice</h3>
+                </div>
+                <p class="repo-desc">Repositorio de soporte y prácticas experimentales. Incluye comparativas multilingües (Python y scripts en R), junto con los datasets en crudo (<code>Salud.csv</code>, <code>accidentes.csv</code>).</p>
+                <div class="repo-meta">
+                    <span><i class="fas fa-code-branch"></i> Main Branch</span>
+                    <span><i class="fas fa-user"></i> deisy-s</span>
+                </div>
+                <a href="https://github.com/deisy-s/datasciencepractice" target="_blank" class="btn-outline">Ver Código Fuente</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center">
+            <p>© 2026 Carlos | Ingeniería en Sistemas Computacionales.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

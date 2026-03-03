@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comparativa y Conclusiones | Portafolio de Ciencia de Datos</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="css/main.css" />
+
+    <style>
+      /* Estilos específicos para las tablas comparativas */
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .comparison-table th,
+      .comparison-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .comparison-table th {
+        background-color: rgba(var(--surface-color), 0.5);
+        color: var(--text-secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+      }
+      .comparison-table tr:last-child td {
+        border-bottom: none;
+      }
+      .comparison-table tbody tr:hover {
+        background-color: rgba(37, 99, 235, 0.02);
+      }
+      .concept-card {
+        border-left: 4px solid var(--accent-color);
+        padding-left: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .concept-card h4 {
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .highlight-term {
+        color: var(--accent-color);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <nav class="navbar">
+      <div class="logo"><i class="fas fa-database"></i> DS Docs</div>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="limpieza.html">Data Cleaning</a>
+        <a href="modelos.html">Tutorial de Modelos</a>
+        <a href="comparativa.html" class="active">Comparativa</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+    </nav>
+
+    <section
+      class="container"
+      style="padding-top: 120px; padding-bottom: 2rem; border-bottom: none"
+    >
+      <div
+        data-aos="fade-down"
+        style="text-align: center; max-width: 900px; margin: 0 auto"
+      >
+        <h1
+          style="
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+          "
+        >
+          Análisis Arquitectónico
+        </h1>
+        <p style="font-size: 1.2rem; color: var(--text-secondary)">
+          Evaluación crítica de frameworks, conceptos de riesgo en Machine
+          Learning y conclusiones técnicas para el despliegue en entornos de
+          producción.
+        </p>
+      </div>
+    </section>
+
+    <section class="container" style="padding-top: 2rem">
+      <div class="card" data-aos="fade-up">
+        <h2>
+          <i class="fas fa-balance-scale"></i> Statsmodels vs Scikit-Learn
+        </h2>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem">
+          Aunque ambos frameworks pueden realizar Regresiones Lineales, su
+          filosofía de diseño arquitectónico es completamente opuesta. Conocer
+          cuándo usar cuál es la marca de un Científico de Datos Senior.
+        </p>
+
+        <div style="overflow-x: auto">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Característica</th>
+                <th style="color: var(--accent-color)">
+                  <i class="fas fa-chart-bar"></i> Statsmodels
+                </th>
+                <th style="color: #10b981">
+                  <i class="fas fa-robot"></i> Scikit-Learn
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Enfoque Principal</strong></td>
+                <td>Inferencia Estadística Tradicional.</td>
+                <td>Machine Learning y Poder Predictivo.</td>
+              </tr>
+              <tr>
+                <td><strong>Objetivo del Analista</strong></td>
+                <td>Entender el <em>"Por qué"</em>. (Relaciones causales).</td>
+                <td>Entender el <em>"Qué pasará"</em>. (Predicción pura).</td>
+              </tr>
+              <tr>
+                <td><strong>Salida Estándar (Output)</strong></td>
+                <td>
+                  <code>.summary()</code> (p-values, intervalos de confianza,
+                  R-cuadrado).
+                </td>
+                <td>
+                  <code>.predict()</code> (Matrices Numpy, Matrices de
+                  Confusión).
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Formato de Fórmulas</strong></td>
+                <td>Sintaxis tipo R (Patsy): <code>"y ~ x1 + x2"</code></td>
+                <td>Matrices Numpy (X train, y train).</td>
+              </tr>
+              <tr>
+                <td><strong>Uso Ideal</strong></td>
+                <td>
+                  Estudios de investigación, economía, auditoría de variables.
+                </td>
+                <td>Pipelines de producción, APIs en tiempo real, Big Data.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding-top: 2rem">
+      <h2 data-aos="fade-right" style="margin-bottom: 2rem">
+        Conceptos Críticos de Evaluación
+      </h2>
+
+      <div class="grid-2">
+        <div class="card" data-aos="zoom-in">
+          <div class="concept-card">
+            <h4><i class="fas fa-brain"></i> Overfitting (Sobreajuste)</h4>
+            <p>
+              Ocurre cuando un modelo (como un Árbol de Decisión sin
+              <code>max_depth</code>) se vuelve demasiado complejo y memoriza
+              los datos de entrenamiento en lugar de aprender el patrón
+              subyacente. <br /><br /><strong>Consecuencia:</strong> 100% de
+              precisión en pruebas internas, pero falla catastróficamente con
+              datos nuevos en el mundo real.
+            </p>
+          </div>
+          <div
+            class="concept-card"
+            style="border-left-color: #ef4444; margin-bottom: 0"
+          >
+            <h4><i class="fas fa-tint"></i> Data Leakage (Fuga de Datos)</h4>
+            <p>
+              El pecado capital del Machine Learning. Ocurre si aplicas un
+              <code>StandardScaler</code> a <strong>todo</strong> tu dataset
+              antes de hacer el <code>train_test_split</code>.
+              <br /><br /><strong>Solución:</strong> Siempre dividir los datos
+              primero, y luego ajustar el escalador solo con los datos de
+              entrenamiento.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="card"
+          data-aos="zoom-in"
+          data-aos-delay="100"
+          style="display: flex; flex-direction: column"
+        >
+          <h3 style="margin-bottom: 0.5rem">
+            <i class="fas fa-chart-pie"></i> Rendimiento de Modelos
+          </h3>
+          <p
+            style="
+              color: var(--text-secondary);
+              font-size: 0.9rem;
+              margin-bottom: 1.5rem;
+            "
+          >
+            Comparativa visual de métricas de éxito según el tipo de algoritmo.
+          </p>
+
+          <div
+            style="position: relative; height: 300px; width: 100%; flex-grow: 1"
+          >
+            <canvas id="compareChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding-top: 2rem; padding-bottom: 6rem">
+      <div
+        class="card"
+        data-aos="fade-up"
+        style="
+          background: linear-gradient(
+            145deg,
+            var(--surface-color),
+            rgba(37, 99, 235, 0.03)
+          );
+          border: 1px solid var(--accent-color);
+        "
+      >
+        <h2 style="color: var(--accent-color); margin-bottom: 1.5rem">
+          <i class="fas fa-flag-checkered"></i> Conclusiones y Siguientes Pasos
+          (Producción)
+        </h2>
+
+        <p style="margin-bottom: 1.5rem; font-size: 1.1rem">
+          Este proyecto ha validado con éxito el flujo de trabajo completo de la
+          ciencia de datos estructurados: desde la ingesta y saneamiento de un
+          CSV corrupto (<code>Salud.csv</code>), hasta el entrenamiento de un
+          Bosque Aleatorio capaz de procesar historiales clínicos.
+        </p>
+
+        <div class="grid-2">
+          <div>
+            <h4 style="margin-bottom: 1rem">
+              <i class="fas fa-check-circle" style="color: #10b981"></i> Hitos
+              Logrados
+            </h4>
+            <ul
+              style="
+                list-style: none;
+                padding-left: 0;
+                line-height: 1.8;
+                color: var(--text-secondary);
+              "
+            >
+              <li>
+                <i class="fas fa-angle-right"></i> Implementación de pipelines
+                de <strong>Feature Engineering</strong>.
+              </li>
+              <li>
+                <i class="fas fa-angle-right"></i> Modelado paramétrico para
+                inferencia (Statsmodels).
+              </li>
+              <li>
+                <i class="fas fa-angle-right"></i> Clasificación no lineal y de
+                ensamble (Random Forest).
+              </li>
+              <li>
+                <i class="fas fa-angle-right"></i> Control estricto de varianza
+                mediante hiperparámetros.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style="margin-bottom: 1rem">
+              <i class="fas fa-rocket" style="color: var(--accent-color)"></i>
+              Ruta de Escalabilidad (Deploy)
+            </h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem">
+              Para llevar estos modelos del entorno local (Jupyter/Scripts) a un
+              entorno empresarial en la nube, la arquitectura requerida sería:
+            </p>
+            <ul
+              style="
+                list-style: none;
+                padding-left: 0;
+                line-height: 1.8;
+                color: var(--text-secondary);
+                font-size: 0.95rem;
+                margin-top: 0.5rem;
+              "
+            >
+              <li>
+                <strong>1. Serialización:</strong> Guardar el modelo entrenado
+                como archivo binario usando <code>joblib</code>.
+              </li>
+              <li>
+                <strong>2. API REST:</strong> Montar el modelo en un backend
+                ligero usando <strong>FastAPI</strong> o <strong>Flask</strong>.
+              </li>
+              <li>
+                <strong>3. Containerización:</strong> Empaquetar todo el sistema
+                en <strong>Docker</strong> para garantizar que funcione en
+                cualquier servidor.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container text-center">
+        <p>© 2026 Carlos | Ingeniería en Sistemas Computacionales.</p>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        const isDark = document.body.getAttribute("data-theme") === "dark";
+        const textColor = isDark ? "#94a3b8" : "#475569";
+        const gridColor = isDark ? "#334155" : "#e2e8f0";
+
+        const ctxComp = document
+          .getElementById("compareChart")
+          .getContext("2d");
+        let compareChart = new Chart(ctxComp, {
+          type: "bar",
+          data: {
+            labels: [
+              "Precisión (Agua)",
+              "Recall (Diabetes)",
+              "R² (Agricultura)",
+            ],
+            datasets: [
+              {
+                label: "Árbol Decisión",
+                data: [0.82, 0.71, 0],
+                backgroundColor: "#10b981",
+                borderRadius: 6,
+              },
+              {
+                label: "Random Forest",
+                data: [0.93, 0.89, 0],
+                backgroundColor: "#8b5cf6",
+                borderRadius: 6,
+              },
+              {
+                label: "Statsmodels OLS",
+                data: [0, 0, 0.81],
+                backgroundColor: "#2563eb",
+                borderRadius: 6,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: { ticks: { color: textColor }, grid: { display: false } },
+              y: {
+                ticks: { color: textColor },
+                grid: { color: gridColor },
+                max: 1.0,
+              },
+            },
+            plugins: {
+              legend: {
+                position: "bottom",
+                labels: { color: textColor, padding: 20 },
+              },
+              tooltip: { mode: "index", intersect: false },
+            },
+          },
+        });
+
+        // Reaccionar al Dark Mode
+        window.addEventListener("themeChanged", (e) => {
+          const dark = e.detail.theme === "dark";
+          const newText = dark ? "#94a3b8" : "#475569";
+          const newGrid = dark ? "#334155" : "#e2e8f0";
+
+          compareChart.options.scales.x.ticks.color = newText;
+          compareChart.options.scales.y.ticks.color = newText;
+          compareChart.options.scales.y.grid.color = newGrid;
+          compareChart.options.plugins.legend.labels.color = newText;
+
+          compareChart.update();
+        });
+      });
+    </script>
+  </body>
+</html>

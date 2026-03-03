@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Cleaning | Portafolio de Ciencia de Datos</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-theme="light">
+    <nav class="navbar">
+      <div class="logo"><i class="fas fa-database"></i> DS Docs</div>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="limpieza.html" class="active">Data Cleaning</a>
+        <a href="modelos.html">Modelos</a>
+        <a href="comparativa.html">Comparativa</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+    </nav>
+
+    <section
+      class="container"
+      style="padding-top: 120px; padding-bottom: 3rem; border-bottom: none"
+    >
+      <div
+        data-aos="fade-down"
+        style="text-align: center; max-width: 800px; margin: 0 auto"
+      >
+        <h1
+          style="
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+          "
+        >
+          Ingeniería de Datos
+        </h1>
+        <p style="font-size: 1.2rem; color: var(--text-secondary)">
+          Análisis, diagnóstico y saneamiento del dataset
+          <code>Salud.csv</code>. Transformación de datos crudos (Raw Data) en
+          un formato estructurado apto para algoritmos de Machine Learning.
+        </p>
+      </div>
+    </section>
+
+    <section class="container" style="padding-top: 2rem">
+      <div class="grid-2">
+        <div data-aos="fade-right">
+          <h2>1. Diagnóstico de Anomalías</h2>
+          <p>
+            Los modelos matemáticos (como la Regresión Lineal o los Árboles de
+            Decisión) fallan catastróficamente si reciben texto donde esperan
+            números, o si encuentran valores vacíos (NaN). Al explorar el
+            archivo original, detectamos 4 problemas críticos que deben ser
+            resueltos en el pipeline.
+          </p>
+        </div>
+
+        <div class="card" data-aos="fade-left">
+          <h3>
+            <i class="fas fa-bug" style="color: var(--error-text)"></i> Errores
+            Detectados en Salud.csv
+          </h3>
+          <ul
+            style="
+              list-style-position: inside;
+              color: var(--text-secondary);
+              margin-top: 1rem;
+              line-height: 2;
+            "
+          >
+            <li>
+              <strong>Tipos Mixtos:</strong> <code>180mg</code> en la columna
+              Glucosa, <code>45 años</code> en Edad.
+            </li>
+            <li>
+              <strong>Errores de Localización:</strong> Uso de coma europea
+              <code>"30,5"</code> en lugar de punto decimal.
+            </li>
+            <li>
+              <strong>Inconsistencia Categórica:</strong> <code>" baja "</code>,
+              <code>"NO"</code>, <code>"si"</code> (espacios y mayúsculas
+              aleatorias).
+            </li>
+            <li>
+              <strong>Valores Nulos (NaN):</strong> Filas sin edad
+              (<code>,28.9,112...</code>) o sin glucosa
+              (<code>51.0,18.8,80,,Media,No</code>).
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <h2 data-aos="fade-up">2. Desarrollo del Pipeline (Saneamiento)</h2>
+
+      <div class="card" data-aos="fade-up" style="margin-top: 2rem">
+        <div
+          class="explanation-tabs"
+          style="display: flex; gap: 1rem; margin-bottom: 1.5rem"
+        >
+          <button
+            class="tab active btn-secondary"
+            onclick="switchTab(this, 'sencillo-clean')"
+            style="
+              padding: 0.5rem 1rem;
+              border-radius: 8px;
+              cursor: pointer;
+              border: 1px solid var(--border-color);
+            "
+          >
+            Estudiante (Sencillo)
+          </button>
+          <button
+            class="tab btn-secondary"
+            onclick="switchTab(this, 'examen-clean')"
+            style="
+              padding: 0.5rem 1rem;
+              border-radius: 8px;
+              cursor: pointer;
+              border: 1px solid var(--border-color);
+              background: transparent;
+            "
+          >
+            Técnico (Examen)
+          </button>
+        </div>
+
+        <div id="sencillo-clean" style="display: block">
+          <p>
+            <strong>¿Qué estamos haciendo?</strong> Estamos pasando un "filtro"
+            automatizado por todo el archivo Excel. Le decimos a Python: "Si ves
+            la palabra 'mg', bórrala. Si ves una coma, cámbiala por un punto
+            para que sea un número real. Y si falta la edad de alguien, ponle la
+            edad promedio de los demás para no tener que borrar a ese paciente
+            completo."
+          </p>
+        </div>
+
+        <div id="examen-clean" style="display: none">
+          <p><strong>Conceptos Clave (Data Wrangling):</strong></p>
+          <ul style="margin-left: 1.5rem; margin-top: 0.5rem">
+            <li>
+              <strong>Casteo y Regex:</strong> Usamos
+              <code>.str.replace()</code> para eliminar caracteres alfanuméricos
+              de vectores numéricos, permitiendo la conversión posterior con
+              <code>.astype(float)</code>.
+            </li>
+            <li>
+              <strong>Normalización Categórica:</strong>
+              <code>.str.strip().str.capitalize()</code> elimina espacios en
+              blanco incidentales (leading/trailing whitespaces) y unifica el
+              capitalizado para evitar que el modelo trate "si", "Si" y " SI"
+              como tres clases distintas.
+            </li>
+            <li>
+              <strong>Imputación Robusta:</strong> En lugar de usar
+              <code>dropna()</code> (que reduce la muestra), imputamos valores
+              continuos usando la <strong>mediana</strong> (menos sensible a
+              outliers) y valores categóricos usando la <strong>moda</strong>.
+            </li>
+          </ul>
+        </div>
+
+        <pre
+          style="margin-top: 2rem"
+        ><button class="copy-btn"><i class="fas fa-copy"></i> Copiar</button><code class="language-python">
+import pandas as pd
+import numpy as np
+
+# 1. Cargar el dataset crudo
+df = pd.read_csv('Documentos/Salud.csv')
+
+# ==========================================
+# FASE 1: LIMPIEZA ESTRUCTURAL (STRING A FLOAT)
+# ==========================================
+# Cambiar coma por punto en el IMC ("30,5" -> 30.5)
+df['IMC'] = df['IMC'].astype(str).str.replace(',', '.').astype(float)
+
+# Eliminar sufijos no numéricos ("180mg" -> 180.0, "45 años" -> 45.0)
+df['Glucosa'] = df['Glucosa'].astype(str).str.replace('mg', '', regex=False).astype(float)
+df['Edad'] = df['Edad'].astype(str).str.replace(' años', '', regex=False).astype(float)
+
+# ==========================================
+# FASE 2: NORMALIZACIÓN CATEGÓRICA
+# ==========================================
+# Quitar espacios extra y poner la primera letra en mayúscula (" baja " -> "Baja", "NO" -> "No")
+df['Actividad_Fisica'] = df['Actividad_Fisica'].str.strip().str.capitalize()
+df['Fumador'] = df['Fumador'].str.strip().str.capitalize()
+
+# ==========================================
+# FASE 3: IMPUTACIÓN DE VALORES NULOS (NaN)
+# ==========================================
+# Llenar edades vacías con la mediana de las edades
+df['Edad'].fillna(df['Edad'].median(), inplace=True)
+
+# Llenar Glucosa vacía con la media
+df['Glucosa'].fillna(df['Glucosa'].mean(), inplace=True)
+
+# Llenar Fumador vacío con el valor más común (la moda)
+df['Fumador'].fillna(df['Fumador'].mode()[0], inplace=True)
+
+# Verificar que ya no haya nulos
+print(df.isnull().sum())
+            </code></pre>
+      </div>
+    </section>
+
+    <section class="container">
+      <h2 data-aos="fade-right">
+        3. Validación de Resultados (Antes vs Después)
+      </h2>
+      <div class="card" data-aos="fade-up" style="margin-top: 1.5rem">
+        <p style="margin-bottom: 1.5rem">
+          Impacto directo de la transformación en la calidad de los datos para
+          entrenamiento.
+        </p>
+
+        <div class="data-diff">
+          <span style="min-width: 250px"
+            ><strong>Error de Sintaxis Numérica:</strong></span
+          >
+          <span class="data-bad">"30,5" (String)</span>
+          <i class="fas fa-arrow-right data-arrow"></i>
+          <span class="data-good">30.5 (Float64)</span>
+        </div>
+        <div class="data-diff">
+          <span style="min-width: 250px"
+            ><strong>Contaminación Alfanumérica:</strong></span
+          >
+          <span class="data-bad">"180mg" (String)</span>
+          <i class="fas fa-arrow-right data-arrow"></i>
+          <span class="data-good">180.0 (Float64)</span>
+        </div>
+        <div class="data-diff">
+          <span style="min-width: 250px"
+            ><strong>Inconsistencia de Clases:</strong></span
+          >
+          <span class="data-bad">" baja " / "BAJA"</span>
+          <i class="fas fa-arrow-right data-arrow"></i>
+          <span class="data-good">"Baja" (Categoría única)</span>
+        </div>
+        <div class="data-diff">
+          <span style="min-width: 250px"
+            ><strong>Datos Faltantes (NaN):</strong></span
+          >
+          <span class="data-bad">NaN (Rompe el modelo)</span>
+          <i class="fas fa-arrow-right data-arrow"></i>
+          <span class="data-good">Imputación Estadística</span>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem" data-aos="zoom-in">
+        <p style="margin-bottom: 1rem; color: var(--text-secondary)">
+          El dataset ahora está listo para la codificación (LabelEncoder) y el
+          entrenamiento de modelos.
+        </p>
+        <a href="modelos.html" class="btn btn-primary"
+          >Proceder a Modelado
+          <i class="fas fa-arrow-right" style="margin-left: 0.5rem"></i
+        ></a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container text-center">
+        <p>© 2026 Carlos | Ingeniería en Sistemas Computacionales.</p>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
